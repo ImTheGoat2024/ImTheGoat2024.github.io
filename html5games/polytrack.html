@@ -54,7 +54,11 @@
       }
       return `<div id='play-count' style='font-size: 14px; color: blue; text-align: center; margin-top: 5px;'>${countText}</div>`;
     }
-      document.getElementById('gameFrame').srcdoc = `
+
+    // Set the iframe srcdoc after it has loaded
+    document.getElementById('gameFrame').addEventListener('load', function() {
+      var gameFrame = document.getElementById('gameFrame');
+      gameFrame.srcdoc = `
         <style>
           #play {
             color: blue;
@@ -70,20 +74,17 @@
           <a id='play' href='https://${pageID}'><h1>PLAY</h1></a>
           ${updatePlayCount()}
         </div>`;
+
+      // Add event listener for the play button
+      gameFrame.contentWindow.document.getElementById('play').addEventListener('click', function() {
+        playCount += 1;
+        localStorage.setItem('playCount_' + pageID, playCount);
+        gameFrame.contentWindow.document.getElementById('play-count').innerHTML = updatePlayCount();
+      });
     });
 
-    // Add event listener for the play button
-    document.getElementById('gameFrame').addEventListener('load', function() {
-      var playButton = document.getElementById('gameFrame').contentWindow.document.getElementById('play');
-      
-      if (playButton) {
-        playButton.addEventListener('click', function() {
-          playCount += 1;
-          localStorage.setItem('playCount_' + pageID, playCount);
-          document.getElementById('gameFrame').contentWindow.document.getElementById('play-count').innerHTML = updatePlayCount();
-        });
-      }
-    });
+    // Trigger the load event to set srcdoc initially
+    document.getElementById('gameFrame').src = 'about:blank';
   </script>
 </body>
 </html>
