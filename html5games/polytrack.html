@@ -13,13 +13,31 @@
   <style>
     #play-container {
       width: 100vw;
-      height: 100%;
-      frameborder: 0;
-      border: 0;
-    }
-    section {
-      width: 100%;
       height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    #gameFrame {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    .topnav {
+      display: flex;
+      justify-content: space-around;
+      background-color: #333;
+      padding: 14px;
+    }
+    .topnav a {
+      color: white;
+      text-decoration: none;
+      padding: 14px 20px;
+      font-size: 18px;
+    }
+    .topnav a:hover {
+      background-color: #ddd;
+      color: black;
     }
   </style>
 </head>
@@ -31,18 +49,15 @@
     <a href="/other.html">Other</a>
   </div>
  
-  <iframe frameborder="0" id="gameFrame"></iframe>
+  <div id="play-container">
+    <iframe frameborder="0" id="gameFrame"></iframe>
+  </div>
 
   <script>
-    // Unique identifier for this game page
-    var pageID = 'imthegoat2024.github.io/testingTribute/'; // Include the full URL here
-
-
-    // Initialize play counter using the unique pageID
+    var pageID = 'imthegoat2024.github.io/testingTribute/';
     var playCount = localStorage.getItem('playCount_' + pageID) || 0;
     playCount = parseInt(playCount);
 
-    // Function to update play count display
     function updatePlayCount() {
       let countText;
       if (playCount === 0) {
@@ -55,27 +70,35 @@
       return `<div id='play-count' style='font-size: 14px; color: blue; text-align: center; margin-top: 5px;'>${countText}</div>`;
     }
 
-      document.getElementById('gameFrame').srcdoc = `
-        <style>
-          #play {
-            color: blue;
-            text-align: center;
-            text-decoration: none;
-            font-family: 'arial';
-            font-size: 20px;
-            margin-bottom: 10px;
-          }
-        </style>
-        <div style='text-align: center;'>
-          <a id='play' href='https://${pageID}'><h1>PLAY</h1></a>
-          ${updatePlayCount()}
-        </div>`;
-    });
+    document.getElementById('gameFrame').srcdoc = `
+      <style>
+        body {
+          margin: 0;
+          padding: 0;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100vh;
+          font-family: Arial, sans-serif;
+        }
+        #play {
+          color: blue;
+          text-align: center;
+          text-decoration: none;
+          font-size: 20px;
+          margin-bottom: 10px;
+        }
+        h1 {
+          font-size: 40px;
+        }
+      </style>
+      <div style='text-align: center;'>
+        <a id='play' href='https://${pageID}'><h1>PLAY</h1></a>
+        ${updatePlayCount()}
+      </div>`;
 
-    // Add event listener for the play button
     document.getElementById('gameFrame').addEventListener('load', function() {
       var playButton = document.getElementById('gameFrame').contentWindow.document.getElementById('play');
-      
       if (playButton) {
         playButton.addEventListener('click', function() {
           playCount += 1;
