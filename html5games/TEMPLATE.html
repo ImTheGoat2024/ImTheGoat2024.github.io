@@ -35,8 +35,7 @@
 
   <script>
     // Unique identifier for this game page
-    var pageID = 'imthegoat2024.github.io/REPO'; // Include the full URL here
-
+    var pageID = 'imthegoat2024.github.io/REPO';
 
     // Initialize play counter using the unique pageID
     var playCount = localStorage.getItem('playCount_' + pageID) || 0;
@@ -55,23 +54,23 @@
       return `<div id='play-count' style='font-size: 14px; color: blue; text-align: center; margin-top: 5px;'>${countText}</div>`;
     }
 
-      document.getElementById('gameFrame').srcdoc = `
-        <style>
-          #play {
-            color: blue;
-            text-align: center;
-            text-decoration: none;
-            font-family: 'arial';
-            font-size: 20px;
-            display: 'block';
-            margin-bottom: 10px;
-          }
-        </style>
-        <div style='text-align: center;'>
-          <a id='play' href='https://${pageID}'><h1>PLAY</h1></a>
-          ${updatePlayCount()}
-        </div>`;
-    });
+    // Automatically set the srcdoc attribute of the iframe
+    document.getElementById('gameFrame').srcdoc = `
+      <style>
+        #play {
+          color: blue;
+          text-align: center;
+          text-decoration: none;
+          font-family: 'arial';
+          font-size: 20px;
+          display: block;
+          margin-bottom: 10px;
+        }
+      </style>
+      <div style='text-align: center;'>
+        <a id='play' href='https://${pageID}'><h1>PLAY</h1></a>
+        ${updatePlayCount()}
+      </div>`;
 
     // Add event listener for the play button
     document.getElementById('gameFrame').addEventListener('load', function() {
