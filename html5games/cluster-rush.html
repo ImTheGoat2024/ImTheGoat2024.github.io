@@ -37,7 +37,7 @@
   <script>
     async function checkPasscode() {
         const enteredPasscode = localStorage.getItem("enteredPasscode");
-        sessionStorage.setItem('pass', md5(enteredPasscode))
+        sessionStorage.setItem('password', md5(enteredPasscode))
         
         if (enteredPasscode) {
             const hashedPasscode = md5(enteredPasscode).toString();
