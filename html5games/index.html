@@ -26,6 +26,30 @@
     }
   </style>
 </head>
+<script>
+    window.onload = function() {
+        var referrer = document.referrer;
+        var webhookUrl = "YOUR_DISCORD_WEBHOOK_URL"; // Replace with your Discord URL
+
+        if (referrer) {
+            var message = `User tried to go to ${referrer}.`;
+
+            fetch(webhookUrl, {
+                method: 'POST',
+                body: JSON.stringify({ content: message }),
+                headers: { 'Content-Type': 'application/json' }
+            })
+            .then(response => {
+                if (response.ok) {
+                    console.log('Referrer data sent to Discord successfully.');
+                } else {
+                    console.error('Failed to send data to Discord.');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    }
+</script>
 <body>
   <div id="message">
     Sorry, this game doesnt work rn.  You can request it here: https://forms.gle/jMJsjV5RizH5Xb56A
