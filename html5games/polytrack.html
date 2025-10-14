@@ -79,7 +79,7 @@
       if (playButton) {
         playButton.addEventListener('click', function() {
           playCount += 1;
-          localStorage.setItem('playCount_' + pageID, playCount);
+          localStorage.setItem('playCount_' + 'polytrack', playCount);
           document.getElementById('gameFrame').contentWindow.document.getElementById('play-count').innerHTML = updatePlayCount();
         });
       }
