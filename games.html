@@ -79,10 +79,6 @@
     <button class="tablink" onclick="openPage('Classic', this, 'blue')">Classic</button>
     <button class="tablink" onclick="openPage('Franchise', this, 'blue')">Franchise</button>
     <button class="tablink" onclick="openPage('Puzzle', this, 'blue')">Puzzle</button>
-    <div id="MostPlayed" class="tabcontent">
-      <h2 style="color: lime; font-size: 30px;">Most Played:</h2>
-      <ul id='mostPlayedList'></ul>
-    </div>
     <div id="All" class="tabcontent">
       <ul id='list'>
         <li class="animals" data-searchable="false"><a style="color: black;"></a></li>
@@ -340,6 +336,20 @@
     </div>
   <script>
     document.getElementById("defaultOpen").click();
+
+    function openPage(pageName, elmnt, color) {
+      var i, tabcontent, tablinks;
+      tabcontent = document.getElementsByClassName("tabcontent");
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+      tablinks = document.getElementsByClassName("tablink");
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].style.backgroundColor = "";
+      }
+      document.getElementById(pageName).style.display = "block";
+      elmnt.style.backgroundColor = color;
+    }
     // Function to search games
     function search_animal() {
         var input, filter, ul, li, a, i, txtValue;
@@ -367,114 +377,6 @@
 
     // Get the element with id="defaultOpen" and click on it
     document.getElementById("defaultOpen").click();
-    // Mapping of pageIDs to game names
-    const gameNames = {
-        "cluster-rush": "Cluster Rush",
-        "retro-bowl": "Retro Bowl",
-        "retro-c": "Retro Bowl College",
-        "blungi-slime": "Blumgi Slime",
-        "drive-mad": "Drive Mad",
-        "monster": "Monster Tracks",
-        "bitlife": "Bitlife",
-        "wbwwb": "We Become What We Behold (WBWWB)",
-        "cubes2048": "Cubes 2048",
-        "basketrandom": "Basket Random",
-        "basket-stars": "Basketball Stars",
-        "basket-legend-2020": "Basketball Legends 2020",
-        "getaway": "Getaway Shootout",
-        "projectsand": "Project Sand",
-        "breakout": "Idle Breakout",
-        "rocket": "Blumgi Rocket",
-        "happywheels": "Happy Wheels",
-        "territorial-hidden": "Territorial",
-        "blockblast": "Block Blast!",
-        "sandboxels": "Sandboxels",
-        "squirdle": "Squirdle",
-        "csgoclicker": "CSGO Clicker",
-        "cubefield": "Cubefield",
-        "yohoho": "YoHoHo.io",
-        "airpod": "Gimme Da Airpod",
-        "assassin": "Tactical Assassin",
-        "finalearth": "The Final Earth",
-        "tankdefend": "Defend The Tank",
-        "pandemic": "Pandemic II",
-        "gondor": "Battle For Gondor",
-        "finalearth2": "The Final Earth 2 (Spam 'Close')",
-        "fishing": "Tiny Fishing",
-        "shark": "Idle Shark",
-        "ckc": "Creative Kill Chamber",
-        "recoil": "Recoil",
-        "run3": "Run 3",
-        "aswc": "A Small World Cup",
-        "footballgm": "Football GM",
-        "sortthecourt": "Sort the Court!",
-        "sm64": "Cursed Super Mario 64",
-        "swerve": "Swerve",
-        "monkeymart": "Monkey Mart",
-        "polytrack": "POLY TRACK!!!!",
-        "slowroads": "Slow Roads",
-        "at2": "Awesome Tanks 2",
-        "wolfenstein": "Wolfenstein 3D",
-        "superstarcar": "Super Star Car",
-        "tosstheturtle": "Toss The Turtle",
-        "pf2": "Parking Fury 2 (DOES NOT SAVE)",
-        "hoh": "House Of Hazards",
-        "ngon": "N-Gon",
-        "icraft": "Infinite Craft",
-        "carsurvival": "Car Survival"
-    };
-
-    // New Function to display the most played games
-    function displayMostPlayed() {
-        const mostPlayedList = document.getElementById("mostPlayedList");
-        const gameCounts = [];
-
-        // Loop through localStorage to find playCounts
-        for (let i = 0; i < localStorage.length; i++) {
-            const key = localStorage.key(i);
-            if (key.startsWith('playCount_')) {
-                const pageID = key.split('playCount_')[1];
-                const count = localStorage.getItem(key);
-                gameCounts.push({ pageID, count });
-            }
-        }
-
-        // Sort games by playCount in descending order
-        gameCounts.sort((a, b) => b.count - a.count);
-
-        // Create list items for the most played games
-        gameCounts.forEach(game => {
-            const listItem = document.createElement("li");
-            listItem.className = "animals";
-            const link = document.createElement("a");
-            link.href = `/html5games/${game.pageID}.html`;
-            link.style.color = 'blue';
-            link.innerText = gameNames[game.pageID] || game.pageID; // Use mapped name or pageID if not found
-            listItem.appendChild(link);
-            mostPlayedList.appendChild(listItem);
-        });
-    }
-
-    // Call the display function after the page loads
-    window.onload = function() {
-        displayMostPlayed();
-        document.getElementById("defaultOpen").click();
-    };
-
-    // Existing function to open tabs
-    function openPage(pageName, elmnt, color) {
-        var i, tabcontent, tablinks;
-        tabcontent = document.getElementsByClassName("tabcontent");
-        for (i = 0; i < tabcontent.length; i++) {
-            tabcontent[i].style.display = "none";
-        }
-        tablinks = document.getElementsByClassName("tablink");
-        for (i = 0; i < tablinks.length; i++) {
-            tablinks[i].style.backgroundColor = "";
-        }
-        document.getElementById(pageName).style.display = "block";
-        elmnt.style.backgroundColor = color;
-    }
   </script>
 </body>
 </html>
