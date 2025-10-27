@@ -35,8 +35,6 @@
   <section id="gameContent"></section>
 
   <script>
-    // Check if the localStorage variable 'passcodeEntered' is set to true
-    var passcodeEntered = localStorage.getItem('passcodeEntered');
 
     // Set the content of the game based on passcodeEntered value
     document.getElementById('gameContent').innerHTML = `
@@ -47,7 +45,7 @@
           text-decoration: none;
           font-family: 'arial';
           font-size: 27px;
-          display: ${passcodeEntered === 'true' ? 'block' : 'none'};
+          display: 'block';
         }
       </style>
       <a id='play' href='/gamehub/cookieclicker'><h1>PLAY</h1></a>`;
